@@ -25,14 +25,32 @@ class _HomeViewState extends State<HomeView> {
       ),
       body: provider.isLoading
           ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              itemCount: provider.datas.length,
-              itemBuilder: (context, index) {
-                final data = provider.datas[index];
-                return ListTile(
-                  title: Text("${provider.datas[index]['email']}"),
-                );
-              },
+          : Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListView.builder(
+                itemCount: provider.datas.length,
+                itemBuilder: (context, index) {
+                  final data = provider.datas[index];
+                  return Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: Card(
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          child: Text("${data['id']}"),
+                        ),
+                        title: Text(
+                          "${data['name']}",
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Text(
+                          "${data['email']}",
+                          style: const TextStyle(fontWeight: FontWeight.w300),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
     );
   }

@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:technical_round_app1/models/model.dart';
 
 class UserDetailsService {
   final dio = Dio();
@@ -13,9 +12,15 @@ class UserDetailsService {
       var response = await dio.get(apiUrl);
       log("${response.data}");
 
-      final res = response.data;
+      log("StatusCode : ${response.statusCode}");
 
-      return res;
+      if (response.statusCode == 200) {
+        final res = response.data;
+
+        return res;
+      } else {
+        return [];
+      }
     } catch (e) {
       log("Error : $e");
 
