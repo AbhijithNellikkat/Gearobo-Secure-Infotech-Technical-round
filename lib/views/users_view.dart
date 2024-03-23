@@ -1,49 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:technical_round_app1/controllers/controller.dart';
+import 'package:technical_round_app1/controllers/users_controller.dart';
 
-class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+class UsersView extends StatefulWidget {
+  const UsersView({super.key});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  State<UsersView> createState() => _UsersViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _UsersViewState extends State<UsersView> {
   @override
   void initState() {
-    Provider.of<UserDetailsController>(context, listen: false).fetchDatas();
+    Provider.of<UsersController>(context, listen: false).fetchAllUsers();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<UserDetailsController>(context);
+    final provider = Provider.of<UsersController>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home '),
+        title: const Text('Home'),
       ),
-      body: provider.isLoading
+      body: provider.loading
           ? const Center(child: CircularProgressIndicator())
           : Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListView.builder(
-                itemCount: provider.datas.length,
+                itemCount: provider.users.length,
                 itemBuilder: (context, index) {
-                  final data = provider.datas[index];
+                  final data = provider.users[index];
                   return Padding(
                     padding: const EdgeInsets.all(2.0),
                     child: Card(
                       child: ListTile(
                         leading: CircleAvatar(
-                          child: Text("${data['id']}"),
+                          child: Text("${data.id}"),
                         ),
                         title: Text(
-                          "${data['name']}",
+                          "${data.name}",
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         subtitle: Text(
-                          "${data['email']}",
+                          "${data.email}",
                           style: const TextStyle(fontWeight: FontWeight.w300),
                         ),
                       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:technical_round_app1/controllers/controller.dart';
-import 'package:technical_round_app1/views/home_view.dart';
+import 'package:technical_round_app1/controllers/users_controller.dart';
+import 'package:technical_round_app1/views/users_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,8 +15,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => UserDetailsController(),
-        )
+          create: (context) => UsersController(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: HomeView(),
+        home: const UsersView(),
       ),
     );
   }
